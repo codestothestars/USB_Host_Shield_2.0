@@ -487,7 +487,8 @@ uint8_t HIDBoot<BOOT_PROTOCOL>::Init(uint8_t parent, uint8_t port, bool lowspeed
                         USBTRACE("skip SET_PROTOCOL\n");
                         goto SKIP_SET_PROTOCOL;
                 }
-                rcode = SetProtocol(bootIf[i], bRptProtoEnable ? HID_RPT_PROTOCOL : USB_HID_BOOT_PROTOCOL);
+                // codestothestars - enables reading function key at the cost of the caps-lock LED
+                rcode = SetProtocol(bootIf[i], HID_RPT_PROTOCOL);
                 USBTRACE2("SET_PROTOCOL: ", rcode);
                 if (rcode && rcode != hrSTALL) goto Fail;
 SKIP_SET_PROTOCOL:
